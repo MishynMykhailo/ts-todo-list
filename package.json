@@ -1,0 +1,24 @@
+{
+  "name": "ts-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MishynMykhailo/ts-project.git"
+  },
+  "keywords": [],
+  "author": "Mishyn Mykhailo <misham18092001@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MishynMykhailo/ts-project/issues"
+  },
+  "homepage": "https://github.com/MishynMykhailo/ts-project#readme",
+  "dependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
