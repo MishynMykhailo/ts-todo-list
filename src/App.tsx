@@ -1,26 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
 import { IItem } from "./types/todo";
+import { nanoid } from "nanoid";
 const App: React.FC = () => {
   const [todos, setTodos] = useState<IItem[]>([]);
+  useEffect(() => {
+    if (!localStorage.getItem("todos")) {
+      return;
+    }
+    const result = JSON.parse(localStorage.getItem("todos") || " ");
+    setTodos(result);
+  }, []);
 
   function todoAddHandler(todo: IItem) {
     setTodos((prevTodos) => {
       return [
         ...prevTodos,
         {
-          id: Math.random().toString(),
+          id: nanoid(),
           title: todo.title,
         },
       ];
     });
+    localStorage.setItem("todos", JSON.stringify(todos));
   }
+  //  delete todo
   function todoRemoveHandler(id: string): void {
     setTodos((prevTodos) => {
-      return prevTodos.filter((item) => {
+      const result = prevTodos.filter((item) => {
         return item.id !== id;
       });
+      localStorage.setItem("todos", JSON.stringify(result));
+      return result;
     });
   }
   return (

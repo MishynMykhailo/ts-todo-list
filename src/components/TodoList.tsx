@@ -7,14 +7,11 @@ interface IProps {
 const TodoList: React.FC<IProps> = (props) => {
   return (
     <ul>
-      {props.todos.map((item) => {
+      {props.todos.map(({ id, title }) => {
         return (
-          <li key={item.id}>
-            <div>{item.id}</div>
-            <div>{item.title}</div>
-            <button onClick={props.onRemoveTodo.bind(this, item.id)}>
-              Remove
-            </button>
+          <li key={id}>
+            <div>{title}</div>
+            <button onClick={props.onRemoveTodo.bind(this, id)}>Remove</button>
           </li>
         );
       })}
