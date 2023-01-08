@@ -3,8 +3,10 @@ import AddTodo from "./components/AddTodo";
 import TodoList from "./components/TodoList";
 import { IItem } from "./types/todo";
 import { nanoid } from "nanoid";
+
 const App: React.FC = () => {
   const [todos, setTodos] = useState<IItem[]>([]);
+
   useEffect(() => {
     if (!localStorage.getItem("todos")) {
       return;
@@ -15,15 +17,17 @@ const App: React.FC = () => {
 
   function todoAddHandler(todo: IItem) {
     setTodos((prevTodos) => {
-      return [
+      const result = [
         ...prevTodos,
         {
           id: nanoid(),
           title: todo.title,
+          status: false,
         },
       ];
+      localStorage.setItem("todos", JSON.stringify(result));
+      return result;
     });
-    localStorage.setItem("todos", JSON.stringify(todos));
   }
   //  delete todo
   function todoRemoveHandler(id: string): void {

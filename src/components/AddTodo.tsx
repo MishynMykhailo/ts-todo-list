@@ -9,9 +9,7 @@ const AddTodo: React.FC<IProps> = ({ onAddTodo }) => {
   const [todo, setTodo] = useState<Partial<IItem>>({});
   // через таргет берем value и создаем ID
   function todoHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    setTodo({
-      title: e.target.value,
-    });
+    setTodo({ title: e.target.value });
   }
 
   // Отправляем создание todo
@@ -27,7 +25,12 @@ const AddTodo: React.FC<IProps> = ({ onAddTodo }) => {
     <form onSubmit={submitHandler}>
       <div>
         <span>Add todo</span>
-        <input type="text" id="add-todo" onChange={todoHandler}></input>
+        <input
+          type="text"
+          id="add-todo"
+          onChange={todoHandler}
+          value={todo?.title}
+        />
       </div>
       <button type="submit">AddTodo</button>
     </form>
