@@ -1,0 +1,47 @@
+.ul {
+  color: var(--text-color);
+}
+.li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: normal;
+  border: 1px solid var(--primary-bg-color);
+  background-color: rgba(77, 48, 139, 0.692);
+}
+.li:hover,
+.li:focus {
+  transform: scale(1.05);
+}
+.li:hover .p,
+.li:focus .p {
+  text-overflow: clip;
+  overflow: auto;
+}
+
+.li:not(:last-child) {
+  margin-bottom: 15px;
+}
+.p {
+  width: 150px;
+  hyphens: manual;
+  padding: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.button {
+  color: var(--text-color);
+  display: flex;
+  text-align: center;
+  align-items: center;
+  padding: 15px;
+  background-color: var(--transparent-color);
+  border: none;
+  cursor: pointer;
+  transition: all 250ms var(--main-transition);
+}
+.button:hover,
+.button:focus {
+  background-color: var(--primary-bg-color);
+  color: white;
+}

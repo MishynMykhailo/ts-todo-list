@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import AddTodo from "./components/AddTodo";
-import TodoList from "./components/TodoList";
-import { IItem } from "./types/todo";
+import s from "./App.module.css";
+import AddTodo from "../AddTodo/AddTodo";
+import TodoList from "../TodoList/TodoList";
+import { IItem } from "../../types/todo";
 import { nanoid } from "nanoid";
 
 const App: React.FC = () => {
@@ -15,13 +16,13 @@ const App: React.FC = () => {
     setTodos(result);
   }, []);
 
-  function todoAddHandler(todo: IItem) {
+  function todoAddHandler(todo: string) {
     setTodos((prevTodos) => {
       const result = [
         ...prevTodos,
         {
           id: nanoid(),
-          title: todo.title,
+          title: todo,
           status: false,
         },
       ];
@@ -40,7 +41,8 @@ const App: React.FC = () => {
     });
   }
   return (
-    <div className="App">
+    <div className={s.div}>
+      <h1 className={s.h1}>Todo list</h1>
       <AddTodo onAddTodo={todoAddHandler} />
       <TodoList onRemoveTodo={todoRemoveHandler} todos={todos} />
     </div>

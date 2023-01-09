@@ -1,0 +1,36 @@
+.form {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+.div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.input {
+  background-color: rgb(77, 48, 139);
+  border: none;
+  height: 50%;
+  width: 200px;
+  color: var(--text-color);
+  outline: none;
+  font-size: 18px;
+}
+
+.button {
+  color: var(--text-color);
+  display: flex;
+  text-align: center;
+  align-items: center;
+  padding: 15px;
+  background-color: var(--transparent-color);
+  border: none;
+  cursor: pointer;
+  transition: all 250ms var(--main-transition);
+}
+.button:hover,
+.button:focus {
+  background-color: var(--primary-bg-color);
+  color: white;
+}

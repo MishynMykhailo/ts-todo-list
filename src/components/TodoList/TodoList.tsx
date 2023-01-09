@@ -1,18 +1,26 @@
 import React from "react";
-import { IItem } from "../types/todo";
+import { IItem } from "../../types/todo";
+import s from "./TodoList.module.css";
 interface IProps {
   todos: IItem[];
   onRemoveTodo: (id: string) => void;
 }
 const TodoList: React.FC<IProps> = (props) => {
   return (
-    <ul>
+    <ul className={s.ul}>
       {props.todos.map(({ id, title }) => {
         return (
-          <li key={id}>
-            <div>{title}</div>
-            <button onClick={props.onRemoveTodo.bind(this, id)}>Remove</button>
-          </li>
+          <>
+            <li key={id} className={s.li}>
+              <p className={s.p}>{title}</p>
+              <button
+                onClick={props.onRemoveTodo.bind(this, id)}
+                className={s.button}
+              >
+                Remove
+              </button>
+            </li>
+          </>
         );
       })}
     </ul>
