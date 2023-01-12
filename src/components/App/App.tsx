@@ -4,6 +4,15 @@ import AddTodo from "../AddTodo/AddTodo";
 import TodoList from "../TodoList/TodoList";
 import { IItem } from "../../types/todo";
 import { nanoid } from "nanoid";
+import { Notify } from "notiflix/build/notiflix-notify-aio";
+
+Notify.init({
+  width: "300px",
+  position: "right-bottom",
+  closeButton: false,
+  clickToClose: true,
+  timeout: 2000,
+});
 
 const App: React.FC = () => {
   const [todos, setTodos] = useState<IItem[]>([]);
@@ -17,6 +26,10 @@ const App: React.FC = () => {
   }, []);
 
   function todoAddHandler(todo: string) {
+    if (todo.trim().length < 1) {
+      Notify.failure("Notes is empty");
+      return;
+    }
     setTodos((prevTodos) => {
       const result = [
         ...prevTodos,
@@ -26,28 +39,11 @@ const App: React.FC = () => {
           status: false,
         },
       ];
+      Notify.success("Note added");
       localStorage.setItem("todos", JSON.stringify(result));
       return result;
     });
   }
-  // function changeStatusHandler(id: string) {
-  //   console.log("hi");
-  //   console.log(id);
-  //   // setTodos((prevTodos) => {
-  //   //   const result = prevTodos.filter((item) => {
-  //   //     return item.id === id;
-  //   //   });
-  //   //   localStorage.setItem("todos", JSON.stringify(result));
-  //   //   return result;
-  //   // });
-  //   setTodos((prevTodos) => {
-  //     return prevTodos.map((todo) => {
-  //       if (todo.id === id) {
-  //         return [...prevTodos];
-  //       }
-  //     });
-  //   });
-  // }
 
   function changeStatusHandler(idTodo: string): void {
     setTodos((prevTodos) => {
@@ -72,16 +68,22 @@ const App: React.FC = () => {
       localStorage.setItem("todos", JSON.stringify(result));
       return result;
     });
+    Notify.success("Note deleted");
   }
   return (
     <div className={s.div}>
       <h1 className={s.h1}>Todo list</h1>
       <AddTodo onAddTodo={todoAddHandler} />
-      <TodoList
-        onRemoveTodo={todoRemoveHandler}
-        todos={todos}
-        changeStatusHandler={changeStatusHandler}
-      />
+
+      {todos.length >= 1 ? (
+        <TodoList
+          onRemoveTodo={todoRemoveHandler}
+          todos={todos}
+          changeStatusHandler={changeStatusHandler}
+        />
+      ) : (
+        <p className={s.p}>Write down a note 📒</p>
+      )}
     </div>
   );
 };

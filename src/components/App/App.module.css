@@ -13,3 +13,9 @@
   padding: 15px;
   background-color: rgb(33, 13, 71);
 }
+.p {
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
