@@ -31,6 +31,7 @@ const AddTodo: React.FC<IProps> = ({ onAddTodo }) => {
             id="add-todo"
             onChange={todoHandler}
             value={todo}
+            autoComplete="off"
           />
         </div>
         <button className={s.button} type="submit">
