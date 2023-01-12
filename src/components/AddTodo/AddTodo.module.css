@@ -26,8 +26,9 @@
   padding: 15px;
   background-color: var(--transparent-color);
   border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: all 250ms var(--main-transition);
+  transition: var(--main-transition);
 }
 .button:hover,
 .button:focus {

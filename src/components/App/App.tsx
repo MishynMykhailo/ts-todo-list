@@ -30,6 +30,39 @@ const App: React.FC = () => {
       return result;
     });
   }
+  // function changeStatusHandler(id: string) {
+  //   console.log("hi");
+  //   console.log(id);
+  //   // setTodos((prevTodos) => {
+  //   //   const result = prevTodos.filter((item) => {
+  //   //     return item.id === id;
+  //   //   });
+  //   //   localStorage.setItem("todos", JSON.stringify(result));
+  //   //   return result;
+  //   // });
+  //   setTodos((prevTodos) => {
+  //     return prevTodos.map((todo) => {
+  //       if (todo.id === id) {
+  //         return [...prevTodos];
+  //       }
+  //     });
+  //   });
+  // }
+
+  function changeStatusHandler(idTodo: string): void {
+    setTodos((prevTodos) => {
+      const result = prevTodos.map((todo) => {
+        const { id, status, title } = todo;
+        if (id !== idTodo) {
+          return todo;
+        }
+        return { id, title, status: !status };
+      });
+      console.log(result);
+      localStorage.setItem("todos", JSON.stringify(result));
+      return result;
+    });
+  }
   //  delete todo
   function todoRemoveHandler(id: string): void {
     setTodos((prevTodos) => {
@@ -44,7 +77,11 @@ const App: React.FC = () => {
     <div className={s.div}>
       <h1 className={s.h1}>Todo list</h1>
       <AddTodo onAddTodo={todoAddHandler} />
-      <TodoList onRemoveTodo={todoRemoveHandler} todos={todos} />
+      <TodoList
+        onRemoveTodo={todoRemoveHandler}
+        todos={todos}
+        changeStatusHandler={changeStatusHandler}
+      />
     </div>
   );
 };

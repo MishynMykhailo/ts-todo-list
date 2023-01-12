@@ -1,26 +1,44 @@
 import React from "react";
 import { IItem } from "../../types/todo";
 import s from "./TodoList.module.css";
+
 interface IProps {
   todos: IItem[];
   onRemoveTodo: (id: string) => void;
+  changeStatusHandler: (idTodo: string) => void;
 }
+
 const TodoList: React.FC<IProps> = (props) => {
   return (
     <ul className={s.ul}>
-      {props.todos.map(({ id, title }) => {
+      {props.todos.map(({ id, title, status }) => {
         return (
-          <>
-            <li key={id} className={s.li}>
-              <p className={s.p}>{title}</p>
-              <button
-                onClick={props.onRemoveTodo.bind(this, id)}
-                className={s.button}
-              >
-                Remove
-              </button>
-            </li>
-          </>
+          <li key={id} className={s.li}>
+            <input
+              type="checkbox"
+              className={s.checkbox}
+              checked={status}
+              id={id}
+              onChange={() => props.changeStatusHandler(id)}
+            />
+            <label
+              htmlFor={id}
+              className={s.label}
+              style={
+                status
+                  ? { textDecoration: "line-through" }
+                  : { textDecoration: "none" }
+              }
+            >
+              {title}
+            </label>
+            <button
+              onClick={props.onRemoveTodo.bind(this, id)}
+              className={s.button}
+            >
+              Remove
+            </button>
+          </li>
         );
       })}
     </ul>
